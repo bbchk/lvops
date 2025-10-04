@@ -1,4 +1,5 @@
 .DEFAULT_GOAL := help
+.PHONY: .env create-network setup build install up down clean install-deps logs exec
 
 .ONESHELL:
 .SHELLFLAGS := -eu -c
@@ -36,13 +37,15 @@ help-%:
 	| ------------------------------
 	|  Quality of life:
 	|
+	|   - logs   Follow logs of service(s). Use 'make logs' or 'make logs s1 s2 s3'.
+	|   - exec   Exec sh into service container. Use 'make exec s1'.
 	|   - help   Print this help message.
 	|   - stop   Stop project containers.
-	|   - logs   Follow logs of service(s). Use `make logs` or `make logs s1 s2 s3`.
-	|   - exec   Exec sh into service container. Use `make exec s1`.
 	|
 	|===============================
 	EOF
+
+
 
 # == Primary targets below ======================
 
@@ -63,17 +66,16 @@ down:
 $(compose_file_custom):
 	touch "$(compose_file_custom)"
 
-
 # == Auxiliary targets below ======================
 
-create-network:
-	-@docker network create lv >/dev/null 2>&1 || true
+# create-network:
+# 	-@docker network create lv >/dev/null 2>&1 || true
 
 # == QoL targets below ======================
 
-logs:
-	docker compose logs -f $(filter-out $@,$(MAKECMDGOALS))
-
-exec:
-	service="$(firstword $(filter-out $@,$(MAKECMDGOALS)))"
-	docker compose exec $${service:-app} bash
+# logs:
+# 	docker compose logs -f $(filter-out $@,$(MAKECMDGOALS))
+#
+# exec:
+# 	service="$(firstword $(filter-out $@,$(MAKECMDGOALS)))"
+# 	docker compose exec $${service:-app} bash
