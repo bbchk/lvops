@@ -61,7 +61,7 @@ down:
 	docker compose down --remove-orphans
 
 $(compose_file_custom):
-       touch "$(compose_file_custom)"
+	touch "$(compose_file_custom)"
 
 
 # == Auxiliary targets below ======================
