@@ -1,13 +1,13 @@
 .DEFAULT_GOAL := help
-.PHONY: .env create-network setup build install down clean install-deps logs exec
+.PHONY: .env create-network setup build install down clean install-deps logs exec help
 
 .ONESHELL:
 .SHELLFLAGS := -eu -c
 SHELL := bash
 
 MAKEFLAGS += --no-print-directory
-.SILENT: .env
-.IGNORE: .env
+.SILENT: .env help-% help create-network
+.IGNORE: .env create-network
 
 export COMPOSE_PATH_SEPARATOR = :
 export COMPOSE_FILE ?= $(compose_file):$(compose_file_custom)
@@ -16,7 +16,7 @@ export APP_GROUP_ID ?= $(shell echo $${SUDO_GID:-$$(id -g)})
 export APP_USER_ID ?= $(shell echo $${SUDO_UID:-$$(id -u)})
 
 help-primary:
-	@cat <<EOF
+	cat <<EOF
 	|------------------------------
 	| Available targets:
 	|------------------------------
@@ -31,7 +31,7 @@ help-primary:
 	EOF
 
 help-auxiliary:
-	@cat <<EOF
+	cat <<EOF
 	| ------------------------------
 	|  Auxiliary:
 	|
@@ -42,7 +42,7 @@ help-auxiliary:
 	EOF
 
 help-qol:
-	@cat <<EOF
+	cat <<EOF
 	| ------------------------------
 	|  Quality of life:
 	|
@@ -73,14 +73,14 @@ $(compose_file_custom):
 
 # == Auxiliary targets below ======================
 
-# create-network:
-# 	-@docker network create lv >/dev/null 2>&1 || true
+create-network:
+	docker network create lv >/dev/null 2>&1 || true
 
 # == QoL targets below ======================
 
-# logs:
-# 	docker compose logs -f $(filter-out $@,$(MAKECMDGOALS))
-#
-# exec:
-# 	service="$(firstword $(filter-out $@,$(MAKECMDGOALS)))"
-# 	docker compose exec $${service:-app} bash
+logs:
+	docker compose logs -f $(filter-out $@,$(MAKECMDGOALS))
+
+exec:
+	service="$(firstword $(filter-out $@,$(MAKECMDGOALS)))"
+	docker compose exec $${service:-app} bash
