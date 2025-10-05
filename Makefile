@@ -13,7 +13,7 @@ export APP_USER_ID ?= $(shell echo $${SUDO_UID:-$$(id -u)})
 
 help-primary:
 	@cat <<EOF
-	|===============================
+	|------------------------------
 	| Available targets:
 	|------------------------------
 	|  Primary:
