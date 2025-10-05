@@ -13,7 +13,9 @@ export APP_USER_ID ?= $(shell echo $${SUDO_UID:-$$(id -u)})
 
 help-primary:
 	@cat <<EOF
-	| ------------------------------
+	|===============================
+	| Available targets:
+	|------------------------------
 	|  Primary:
 	|
 	|   - setup        Boot up project for local development.
@@ -21,7 +23,6 @@ help-primary:
 	|   - up           Start project containers.
 	|   - down         Stop and remove project containers.
 	|   - clean        Shut down compose project and remove all generated artifacts.
-	|
 	|   - test (WIP)   Boot up project and run tests inside main application container.
 	EOF
 
@@ -45,8 +46,6 @@ help-qol:
 	|   - stop   Stop project containers.
 	|   - logs   Follow logs of service(s). Use 'make logs' or 'make logs s1 s2 s3'.
 	|   - exec   Exec sh into service container. Use 'make exec s1'.
-	|
-	|===============================
 	EOF
 
 # == Primary targets below ======================
