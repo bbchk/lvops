@@ -5,6 +5,8 @@
 .SHELLFLAGS := -eu -c
 SHELL := bash
 
+MAKEFLAGS += --no-print-directory
+
 export COMPOSE_PATH_SEPARATOR = :
 export COMPOSE_FILE ?= $(compose_file):$(compose_file_custom)
 export COMPOSE_PROJECT_NAME ?= $(compose_project_name)
