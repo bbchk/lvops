@@ -6,6 +6,8 @@
 SHELL := bash
 
 MAKEFLAGS += --no-print-directory
+.SILENT: .env
+.IGNORE: .env
 
 export COMPOSE_PATH_SEPARATOR = :
 export COMPOSE_FILE ?= $(compose_file):$(compose_file_custom)
