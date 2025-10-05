@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: .env create-network setup build install up down clean install-deps logs exec
+.PHONY: .env create-network setup build install down clean install-deps logs exec
 
 .ONESHELL:
 .SHELLFLAGS := -eu -c
