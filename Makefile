@@ -6,7 +6,7 @@
 SHELL := bash
 
 MAKEFLAGS += --no-print-directory
-.SILENT: .env help-% help create-network
+.SILENT: .env help-primary help-auxiliary help-qol help create-network
 .IGNORE: .env create-network
 
 export COMPOSE_PATH_SEPARATOR = :
