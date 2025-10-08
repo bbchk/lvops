@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := help
-.PHONY: .env create-network setup build install down clean install-deps logs exec help
+.PHONY: .env create-network setup build down clean install.deps logs exec help
 
 .ONESHELL:
 .SHELLFLAGS := -eu -c
@@ -40,7 +40,7 @@ help-auxiliary:
 	|
 	|   - .env                      Write .env files from .env.example ones OR prompt the user to overwrite them.
 	|   - create-network    	Creates external network.
-	|   - install-deps 			Run main container and install dependencies from lock file.
+	|   - install.deps 			Run main container and install dependencies from lock file.
 	|   - $(compose_file_custom)   Creates custom docker compose file.
 	EOF
 
@@ -57,7 +57,7 @@ help-qol:
 
 # == Primary targets below ======================
 
-setup: create-network build install-deps up
+setup: create-network build install.deps up
 
 build: .env
 	docker compose build
