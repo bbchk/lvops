@@ -22,8 +22,6 @@ chmod 600 ~/.kube/config
 export KUBECONFIG=$HOME/.kube/config
 kubectl get nodes
 
-
-
 # sudo systemctl edit k3s.service
 # [Service]
 # ExecStart=
